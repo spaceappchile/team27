@@ -1,3 +1,16 @@
 from django.db import models
 
-# Create your models here.
+
+class LogEntry(models.Model):
+    StackId = models.TextField()
+    StackLevel = models.TextField()
+    SourceObject = models.TextField()
+    File = models.TextField()
+    Thread = models.TextField()
+    Process = models.TextField()
+    TimeStamp = models.DateTimeField()
+    Host = models.TextField()
+    Audience = models.TextField()
+    Context = models.TextField()
+    Routine = models.TextField()
+    Line = models.TextField()
