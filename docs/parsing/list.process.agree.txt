@@ -1,0 +1,7 @@
+Process=CONTROL/Array*
+Process=CONTROL/ARTM/*
+Process=CONTROL/MASTER
+Process=CORR/CCC/*
+Process=CORR/CDPMaster/*
+Process=SCHEDULING_MASTERSCHEDULER
+Process=TELCAL/*
