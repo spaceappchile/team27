@@ -14,3 +14,4 @@ class LogEntry(models.Model):
     Context = models.TextField()
     Routine = models.TextField()
     Line = models.TextField()
+    tag = models.TextField()
