@@ -19,7 +19,7 @@ class Command(BaseCommand):
 
         for item in root:
             if item.tag != 'Header':
-                print item.tag, item.attrib
+                # print item.tag, item.attrib
                 d = item.attrib
                 d['tag'] = item.tag
                 LogEntry.objects.create(**d)
