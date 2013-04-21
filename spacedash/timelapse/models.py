@@ -16,4 +16,11 @@ class LogEntry(models.Model):
     Line = models.TextField()
     LogId = models.TextField()
     tag = models.TextField()
+    process = models.ForeignKey('Process', null=True)
 
+
+class Process(models.Model):
+    start = models.DateTimeField()
+    error = models.DateTimeField(null=True)
+    end = models.DateTimeField(null=True)
+    array = models.TextField()
