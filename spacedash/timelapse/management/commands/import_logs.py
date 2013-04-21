@@ -7,7 +7,7 @@ class Command(BaseCommand):
     args = 'path_to/log_file_name'
 
     def handle(self, *args, **options):
-        filename = args[0]  # 'data/log2013-04-17T23:51:22.735--2013-04-17T23:57:27.505--AOS.xml_recortado'
+        filename = args[0]
 
         import xml
         import xml.etree.ElementTree as ET
@@ -38,7 +38,11 @@ class Command(BaseCommand):
                         process.save()
                     except Process.DoesNotExist:
                         pass
-
-                # print item.attrib
             except IndexError:
                 pass
+
+        for item in root.findall('Error'):
+            if 'Array' in item.attrib['SourceObject']:
+                process = Process.objects.get(array=array, error=None)
+                process.error = item.attrib['TimeStamp']
+                process.save()
