@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from timelapse.models import LogEntry
+from timelapse.models import LogEntry, Process
 
 
 class Command(BaseCommand):
@@ -24,6 +24,7 @@ class Command(BaseCommand):
                     index = item.text.index('Array') + len('Array')
                     array = item.text[index:].split(' ')[0]
                     print array
+                    Process.objects.create(start=item.attrib['TimeStamp'], array=array)
                 elif 'has successfully released a component with curl' in item.text and 'TotalPowerProcessor' in item.text:
                     print 'TERM'
                     print item.attrib
@@ -31,7 +32,12 @@ class Command(BaseCommand):
                     index = item.text.index('Array') + len('Array')
                     array = item.text[index:].split("'")[0]
                     print array
-
+                    try:
+                        process = Process.objects.get(array=array, end=None)
+                        process.end = item.attrib['TimeStamp']
+                        process.save()
+                    except Process.DoesNotExist:
+                        pass
 
                 # print item.attrib
             except IndexError:
