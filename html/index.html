@@ -75,12 +75,12 @@ function ws_geterrorscount(inicio, termino) {
 
 function actualiza(){	
 		//get categories
-		var inicio = $('#inicio').value();
-		var termino = $('#termino').value();
-		var delta = $('#delta').value;
+		var inicio = $('#inicio').val();
+		var termino = $('#termino').val();
+		var delta = $('#delta').val();
 		var intervalo_min = (termino - inicio)*60;
-		var cat = array();
-		var dat =array();
+		var cat = new Array();
+		var dat = new Array();
 		for (i=0; i<intervalo_min; i=i+delta){
 			var catStr = '';
 			var hora = inicio;
