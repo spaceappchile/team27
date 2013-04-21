@@ -39,7 +39,7 @@ $(function () {
                            //chart1.series[0].setData([3, 2, 4, 5]);
 									//chart1.xAxis[0].categories = ['00:00', '08:00', '16:00', '23:59'];
 									//chart1.redraw();
-									crea_tabla();
+									crea_tabla('','');
                         }
                     }                   
                 }
@@ -50,13 +50,13 @@ $(function () {
 
 function ver_error(){
 	$('#tabla_errores').empty();
-	$('#tabla_errores').append('<h2>Procesos activos al momento del error seleccionado</h2><table><tr><td>array involucrado</td><td>timestamp inicio</td><td>timestamp t&eacute;rmino</td></tr><tr><td>Array001</td><td>2013-04-18T15:24:34.333</td><td>2013-04-18T16:03:33.345</td></tr><tr><td>Array003</td><td>2013-04-18T15:50:39.696</td><td>2013-04-18T16:44:33.223</td></tr></table>');
+	$('#tabla_errores').append('<h2>Procesos activos al momento del error seleccionado</h2><table border=1><tr><td>array involucrado</td><td>timestamp inicio</td><td>timestamp t&eacute;rmino</td></tr><tr><td>Array001</td><td>2013-04-18T15:24:34.333</td><td>2013-04-18T16:03:33.345</td></tr><tr><td>Array003</td><td>2013-04-18T15:50:39.696</td><td>2013-04-18T16:44:33.223</td></tr></table>');
 }
 
 function crea_tabla(inicio, termino){
 	//por ahora crea tabla en duro
 	//var array_errores = ws_geterrors(inicio, termino); //crear tabla de acuerdo a este array
-	$('#tabla_errores').append('<h2>errores en ventana de tiempo seleccionada</h2><table><tr><td>Timestamp</td><td>Host</td><td>Routine</td><td>line</td></tr><tr><td>2013-04-18T15:53:30.000</td><td>da56-abm</td><td>loggerThread</td><td>777</td></tr><tr><td>2013-04-18T15:54:07.748</td><td>da56-abm</td><td>virtual void Control::AntennaImpl::reportPointingModel()</td><td>51</td></tr><tr><td onclick="javascript:ver_error()">2013-04-18T15:54:07.798</td><td>da48-abm</td><td>virtual char* Control::AntennaImpl::getMountControllerName()</td><td>40</td></tr></table>');
+	$('#tabla_errores').append('<h2>errores en ventana de tiempo seleccionada</h2><table border=1><tr><td>Timestamp</td><td>Host</td><td>Routine</td><td>line</td></tr><tr><td>2013-04-18T15:53:30.000</td><td>da56-abm</td><td>loggerThread</td><td>777</td></tr><tr><td>2013-04-18T15:54:07.748</td><td>da56-abm</td><td>virtual void Control::AntennaImpl::reportPointingModel()</td><td>51</td></tr><tr><td onclick="javascript:ver_error()">2013-04-18T15:54:07.798</td><td>da48-abm</td><td>virtual char* Control::AntennaImpl::getMountControllerName()</td><td>40</td></tr></table>');
 }
 
 function ws_geterrors(inicio, termino) {
