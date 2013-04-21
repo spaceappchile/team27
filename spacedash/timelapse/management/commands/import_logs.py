@@ -21,10 +21,17 @@ class Command(BaseCommand):
                     print 'INIT'
                     print item.attrib
                     print item.text
+                    index = item.text.index('Array') + len('Array')
+                    array = item.text[index:].split(' ')[0]
+                    print array
                 elif 'has successfully released a component with curl' in item.text and 'TotalPowerProcessor' in item.text:
                     print 'TERM'
                     print item.attrib
                     print item.text
+                    index = item.text.index('Array') + len('Array')
+                    array = item.text[index:].split("'")[0]
+                    print array
+
 
                 # print item.attrib
             except IndexError:
