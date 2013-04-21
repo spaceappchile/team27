@@ -43,6 +43,9 @@ class Command(BaseCommand):
 
         for item in root.findall('Error'):
             if 'Array' in item.attrib['SourceObject']:
-                process = Process.objects.get(array=array, error=None)
-                process.error = item.attrib['TimeStamp']
-                process.save()
+                try:
+                    process = Process.objects.get(array=array, error=None)
+                    process.error = item.attrib['TimeStamp']
+                    process.save()
+                except Process.DoesNotExist:
+                    pass
