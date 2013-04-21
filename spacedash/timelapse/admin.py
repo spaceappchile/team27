@@ -4,7 +4,7 @@ from timelapse.models import LogEntry, Process
 
 
 class LogEntryAdmin(admin.ModelAdmin):
-        list_display = ['id', 'StackId', 'StackLevel', 'SourceObject', 'File', 'Thread' ,'Process' ,'TimeStamp' ,'Host' ,'Audience' ,'Context', 'Routine', 'Line', 'LogId', 'tag']
+        list_display = ['id', 'process', 'StackId', 'StackLevel', 'SourceObject', 'File', 'Thread' ,'Process' ,'TimeStamp' ,'Host' ,'Audience' ,'Context', 'Routine', 'Line', 'LogId', 'tag']
 
 
 class ProcessAdmin(admin.ModelAdmin):

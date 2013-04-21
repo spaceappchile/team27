@@ -16,6 +16,7 @@ class LogEntry(models.Model):
     Line = models.TextField()
     LogId = models.TextField()
     tag = models.TextField()
+    process = models.ForeignKey('Process', null=True)
 
 
 class Process(models.Model):
