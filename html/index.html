@@ -36,9 +36,10 @@ $(function () {
                 column: {
                     events: {
                         click: function(event) {
-                           chart1.series[0].setData([3, 2, 4, 5]);
-									chart1.xAxis[0].categories = ['00:00', '08:00', '16:00', '23:59'];
-									chart1.redraw();
+                           //chart1.series[0].setData([3, 2, 4, 5]);
+									//chart1.xAxis[0].categories = ['00:00', '08:00', '16:00', '23:59'];
+									//chart1.redraw();
+									crea_tabla();
                         }
                     }                   
                 }
@@ -46,6 +47,12 @@ $(function () {
 	});
 
 });
+
+function crea_tabla(inicio, termino){
+	//por ahora crea tabla en duro
+	//var array_errores = ws_geterrors(inicio, termino); //crear tabla de acuerdo a este array
+	$('#tabla_errores').append('<table><tr><td>Timestamp</td><td>Host</td><td>Routine</td><td>line</td></tr><tr><td>2013-04-18T15:53:30.000</td><td>da56-abm</td><td>loggerThread</td><td>777</td></tr><tr><td>2013-04-18T15:54:07.748</td><td>da56-abm</td><td>virtual void Control::AntennaImpl::reportPointingModel()</td><td>51</td></tr><tr><td>2013-04-18T15:54:07.798</td><td>da48-abm</td><td>virtual char* Control::AntennaImpl::getMountControllerName()</td><td>40</td></tr></table>');
+}
 
 function ws_geterrors(inicio, termino) {
 	//llama al ws para obtener los errores, y se envía el array de objetos
@@ -254,162 +261,10 @@ function actualiza(){
 				</div>
 			</form>
 
-          <!--h3>How to use?</h3>
-          <ol>
-             <li>Choose one skin from the list above</li>
-             <li>Click download button</li>
-             <li>Unpack files</li>
-             <li>Make any customisation you need</li>
-             <li>Upload your new site to the server</li>
-          </ol-->
-        </div>        
-
-        <!--div class="col_50">
-          <form action="#" method="post" class="form">
-            <h2>Sample form</h2>
-
-            <p class="col_50">
-              <label for="name">Simple name:</label><br/>
-              <input type="text" name="name" id="name" value="" />
-            </p>
-            <p class="col_50">
-              <label for="email">Simple e-mail:</label><br/>
-              <input type="text" name="email" id="email" value="" />
-            </p>
-            <div class="clearfix"></div>
-
-            <h3>Your favorite number</h3>
-            <p>
-              <div class="col_33">
-                <label for="radio-choice-1"><input type="radio" name="radio-choice-1" id="radio-choice-1" tabindex="2" value="choice-1" /> One</label><br/>
-                <label for="radio-choice-2"><input type="radio" name="radio-choice-1" id="radio-choice-2" tabindex="3" value="choice-2" /> Two</label><br/>
-                <label for="radio-choice-3"><input type="radio" name="radio-choice-1" id="radio-choice-3" tabindex="4" value="choice-3" /> Three</label>
-              </div>
-
-              <div class="col_33">
-                <label for="radio-choice-4"><input type="radio" name="radio-choice-1" id="radio-choice-4" tabindex="2" value="choice-1" /> Four</label><br/>
-                <label for="radio-choice-5"><input type="radio" name="radio-choice-1" id="radio-choice-5" tabindex="3" value="choice-2" /> Five</label><br/>
-                <label for="radio-choice-6"><input type="radio" name="radio-choice-1" id="radio-choice-6" tabindex="4" value="choice-3" /> Six</label>
-              </div>
-
-              <div class="col_33">
-                <label for="radio-choice-7"><input type="radio" name="radio-choice-1" id="radio-choice-7" tabindex="2" value="choice-1" /> Seven</label><br/>
-                <label for="radio-choice-8"><input type="radio" name="radio-choice-1" id="radio-choice-8" tabindex="3" value="choice-2" /> Eight</label><br/>
-                <label for="radio-choice-9"><input type="radio" name="radio-choice-1" id="radio-choice-9" tabindex="3" value="choice-2" /> Niine</label>
-              </div>
-
-            <div class="clearfix"></div>
-            </p>
-
-            <p>
-              <label for="select-choice">Simple city:</label>
-              <select name="select-choice" id="select-choice">
-                <option value="Choice 1">London</option>
-                <option value="Choice 2">Paris</option>
-                <option value="Choice 3">Rome</option>
-              </select>
-            </p>
-
-            <p>
-              <label for="textarea">Simple testimonial:</label><br/>
-              <textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
-            </p>
-
-            <p>
-              <label for="checkbox"><input type="checkbox" name="checkbox" id="checkbox" /> Simple agreement</label><br/>
-            </p>
-
-            <div>
-                <button type="button" class="button">Submit</button>
-            </div>
-          </form>
-        </div>
-
-        <div class="clearfix"></div>
-
-
-        <div class="col_33">
-          <h2>More elements</h2>
-
-          <p>Use <code>strong</code> tag for information with <strong>strong importance</strong>. Use <code>em</code> tag to <em>stress emphasis</em> on a word or phrase.</p>
-
-          <p class="warning">Sample <code>.warning</code></p>
-          <p class="success">Sample <code>.success</code></p>
-          <p class="message">Sample <code>.message</code></p>
-        </div>
-
-        <div class="col_66">
-          <h2>CSS classes table</h2>
-
-          <table class="table">
-            <tr>
-              <th>Class</th>
-              <th>Description</th>
-            </tr>
-
-            <tr>
-              <td><code>.col_33</code></td>
-              <td>Column with 33% width</td>
-            </tr>
-            <tr>
-              <td><code>.col_50</code></td>
-              <td>Column with 50% width</td>
-            </tr>
-            <tr>
-              <td><code>.col_66</code></td>
-              <td>Column with 66% width</td>
-            </tr>
-            <tr>
-              <td><code>.col_100</code></td>
-              <td>Full width column with proper margins</td>
-            </tr>
-            <tr>
-              <td><code>.clearfix</code></td>
-              <td>Use after or wrap a block of floated columns</td>
-            </tr>
-            <tr>
-              <td><code>.left</code></td>
-              <td>Left text alignment</td>
-            </tr>
-            <tr>
-              <td><code>.right</code></td>
-              <td>Right text alignment</td>
-            </tr>
-            <tr>
-              <td><code>.center</code></td>
-              <td>Centered text alignment</td>
-            </tr>
-            <tr>
-              <td><code>.img_floatleft</code></td>
-              <td>Left alignment for images in content</td>
-            </tr>
-            <tr>
-              <td><code>.img_floatright</code></td>
-              <td>Right alignment for images in content</td>
-            </tr>
-            <tr>
-              <td><code>.img</code></td>
-              <td>Makes image change its width when browser window width is changed</td>
-            </tr>
-          </table>
-        </div>
-
-        <div class="clearfix"></div-->
 
       </article>
     </div>
     
-    <!--footer class="footer clearfix">
-      <div class="copyright">Keep it simplest</div>
-
-      <nav class="menu_bottom">
-        <ul>
-          <li class="active"><a href="#">About</a></li>
-          <li><a href="#">Skins</a></li>
-          <li><a href="#">Samples</a></li>
-        </ul>
-      </nav>
-    </footer-->
 
   </div>
 </body>
