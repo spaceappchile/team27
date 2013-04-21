@@ -1,13 +1,134 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link href="favicon.ico" rel="shortcut icon">
-  <link rel="stylesheet" href="css/style.css">
-
   <title>Space Dashboards</title>  
   <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <link href="favicon.ico" rel="shortcut icon"/>
+  <link rel="stylesheet" href="css/style.css"/>
+
+  <script type="text/javascript">
+$(function () { 
+	var chart1 = new Highcharts.Chart({
+        chart: {
+				renderTo: 'container',
+            type: 'column'
+        },
+        title: {
+            text: 'Errores en rango de tiempo'
+        },
+        xAxis: {
+            categories: ['00:00', '12:00', '23:59']
+        },
+        yAxis: {
+            title: {
+                text: 'N° de Errores'
+            }
+        },
+        series: [{
+            name: 'Cantidad de errores',
+            data: [2, 1, 4]
+        }],
+		  plotOptions: {
+                column: {
+                    events: {
+                        click: function(event) {
+                           chart1.series[0].setData([3, 2, 4, 5]);
+									chart1.xAxis[0].categories = ['00:00', '08:00', '16:00', '23:59'];
+									chart1.redraw();
+                        }
+                    }                   
+                }
+            }
+	});
+
+});
+
+function ws_geterrors(inicio, termino) {
+	//llama al ws para obtener los errores, y se envía el array de objetos
+	var errores = new Array();
+
+	return errores;
+}
+
+function ws_geterrorscount(inicio, termino) {
+	var count = 0;
+	//llama al ws para obtener los errores, y al final se cuentan y se envían
+	
+	return count;
+}
+
+function actualiza(){	
+		//get categories
+		var inicio = $('#inicio').value();
+		var termino = $('#termino').value();
+		var delta = $('#delta').value;
+		var intervalo_min = (termino - inicio)*60;
+		var cat = array();
+		var dat =array();
+		for (i=0; i<intervalo_min; i=i+delta){
+			var catStr = '';
+			var hora = inicio;
+			if (i<10){
+				var catStr = ''+inicio+':0'+i;
+			}
+			else if (i>10 && i<60){
+				var catStr = ''+inicio+':'+i;
+			}
+			else if (i>60){
+				if (i%60<10){
+					var catStr = ''+(inicio + i/60)+':0'+i%60;
+				} else {
+					var catStr = ''+(inicio + i/60)+':'+i%60;
+				}
+			}
+
+			cat.push(catStr);
+			//dat.push(ws_geterrorscount(catStr));
+		}
+		//get data
+		dat=[3, 2, 4, 5]; //dato duro mientras se lanza ws, hecho para actualizar con solo 4 barras!!!!
+
+	var chart1 = new Highcharts.Chart({
+        chart: {
+				renderTo: 'container',
+            type: 'column'
+        },
+        title: {
+            text: 'Errores en rango de tiempo'
+        },
+        xAxis: {
+            categories: ['00:00', '12:00', '23:59']
+        },
+        yAxis: {
+            title: {
+                text: 'N° de Errores'
+            }
+        },
+        series: [{
+            name: 'Cantidad de errores',
+            data: [2, 1, 4]
+        }],
+		  plotOptions: {
+                column: {
+                    events: {
+                        click: function(event) {
+                           chart1.series[0].setData([3, 2, 4, 5]);
+									chart1.xAxis[0].categories = cat;
+									chart1.redraw();
+                        }
+                    }                   
+                }
+            }
+	});
+
+});
+	
+}
+</script>
 </head>
 
 <body>
@@ -28,12 +149,7 @@
 
     <div class="info">
 
-        <div class="col_100">
-
-          <p> </p>
-
-        </div>
-
+       
 
 
       <article class="article clearfix">
@@ -68,26 +184,87 @@
           <h2>Gr&aacute;fico de errores en durante el día</h2>
           
           <h3>elija el período de tiempo y el nivel de detalle del gráfico</h3>
-          <ul>
-             <li>Really simple</li>
-             <li>Has ready to use set of simple designs</li>
-             <li>It's written using HTML5 and CSS3</li>
-             <li>It responds to mobile devices</li>
-             <li>No CMS</li>
-             <li>Free</li>
-          </ul>
           
-          <h3>How to use?</h3>
+			<form>
+				<label for="rango">delta de tiempo:</label>
+				<select id="rango" onchange="javascript:actualiza()">
+				  <option value="1">1 min</option>
+				  <option value="10">10 min</option>
+				  <option value="30">30 min</option>
+				  <option value="60">1 h</option>
+				  <option value="120">2 h</option>
+				</select> 
+				<label for="inicio">Hora inicio:</label>
+				<select id="inicio" onchange="javascript:actualiza()">
+				  <option value="0">00:00</option>
+				  <option value="1">01:00</option>
+				  <option value="2">02:00</option>
+				  <option value="3">03:00</option>
+				  <option value="4">04:00</option>
+				  <option value="5">05:00</option>
+				  <option value="6">06:00</option>
+				  <option value="7">07:00</option>
+				  <option value="8">08:00</option>
+				  <option value="9">09:00</option>
+				  <option value="10">10:00</option>
+				  <option value="11">11:00</option>
+				  <option value="12">12:00</option>
+				  <option value="13">13:00</option>
+				  <option value="14">14:00</option>
+				  <option value="15">15:00</option>
+				  <option value="16">16:00</option>
+				  <option value="17">17:00</option>
+				  <option value="18">18:00</option>
+				  <option value="19">19:00</option>
+				  <option value="20">20:00</option>
+				  <option value="21">21:00</option>
+				  <option value="22">22:00</option>
+				  <option value="23">23:00</option>
+				</select> 
+				<label for="termino">Hora t&eacute;rmino:</label>
+				<select id="termino" onchange="javascript:actualiza()">
+				  <option value="0">00:00</option>
+				  <option value="1">01:00</option>
+				  <option value="2">02:00</option>
+				  <option value="3">03:00</option>
+				  <option value="4">04:00</option>
+				  <option value="5">05:00</option>
+				  <option value="6">06:00</option>
+				  <option value="7">07:00</option>
+				  <option value="8">08:00</option>
+				  <option value="9">09:00</option>
+				  <option value="10">10:00</option>
+				  <option value="11">11:00</option>
+				  <option value="12">12:00</option>
+				  <option value="13">13:00</option>
+				  <option value="14">14:00</option>
+				  <option value="15">15:00</option>
+				  <option value="16">16:00</option>
+				  <option value="17">17:00</option>
+				  <option value="18">18:00</option>
+				  <option value="19">19:00</option>
+				  <option value="20">20:00</option>
+				  <option value="21">21:00</option>
+				  <option value="22">22:00</option>
+				  <option value="23">23:00</option>
+				</select> 
+	
+			 	<div id="container" style="width:100%; height:400px;"></div>
+				<div id="tabla_errores">
+				</div>
+			</form>
+
+          <!--h3>How to use?</h3>
           <ol>
              <li>Choose one skin from the list above</li>
              <li>Click download button</li>
              <li>Unpack files</li>
              <li>Make any customisation you need</li>
              <li>Upload your new site to the server</li>
-          </ol>
+          </ol-->
         </div>        
 
-        <div class="col_50">
+        <!--div class="col_50">
           <form action="#" method="post" class="form">
             <h2>Sample form</h2>
 
@@ -217,12 +394,12 @@
           </table>
         </div>
 
-        <div class="clearfix"></div>
+        <div class="clearfix"></div-->
 
       </article>
     </div>
     
-    <footer class="footer clearfix">
+    <!--footer class="footer clearfix">
       <div class="copyright">Keep it simplest</div>
 
       <nav class="menu_bottom">
@@ -232,7 +409,7 @@
           <li><a href="#">Samples</a></li>
         </ul>
       </nav>
-    </footer>
+    </footer-->
 
   </div>
 </body>
