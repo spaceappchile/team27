@@ -9,9 +9,70 @@
   <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   <link href="favicon.ico" rel="shortcut icon"/>
   <link rel="stylesheet" href="css/style.css"/>
-
+	<style>
+#container1 {
+	position: absolute;
+	width: 666px;
+	height: 666px;
+	top: 777px;
+	right: 0px;
+}
+	</style>
   <script type="text/javascript">
 $(function () { 
+$('#container1').highcharts({
+            chart: {
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25
+            },
+            title: {
+                text: 'Temperatura de LO_PPL_ASSEMBLY en antenas de Array001',
+                x: -20 //center
+            },
+            subtitle: {
+                text: 'Source: Log Eventos',
+                x: -20
+            },
+            xAxis: {
+                categories: ['05AM', '06AM', '07AM', '08AM', '09AM', '10AM']
+            },
+            yAxis: {
+                title: {
+                    text: 'Temperatura de Servo ppal (°K)'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                valueSuffix: '°K'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+            },
+            series: [{
+                name: 'CM01',
+                data: [305.025, 305.178, 305.208, 305.117, 305.056  ]
+            }, {
+                name: 'CM02',
+                data: [307.467,307.512,307.558,307.512,307.451]
+            }, {
+                name: 'CM03',
+                data: [306.582,306.505,306.582,306.444,306.345]
+            }, {
+                name: 'CM04',
+                data: [308.365,308.312,308.389,308.298,308.251]
+            }]
+        });
+
 	var chart1 = new Highcharts.Chart({
         chart: {
 				renderTo: 'container',
@@ -265,7 +326,7 @@ function actualiza(){
 				<div id="tabla_errores">
 				</div>
 			</form>
-
+<div id="container1" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 
       </article>
     </div>
